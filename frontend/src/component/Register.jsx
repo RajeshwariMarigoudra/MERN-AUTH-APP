@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../CSS/style.css';
 import { registerUser } from '../api/api.jsx';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -8,6 +9,9 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,6 +22,9 @@ const Register = () => {
       setSuccess('Registration successful!');
       console.log('User registered:', data);
       // Handle success, like redirecting or showing success message
+
+      // Redirect to login page after successful registration
+      navigate('/login'); // Redirects to the /login route
     } catch (err) {
       setError(err.message || 'Registration failed');
     }

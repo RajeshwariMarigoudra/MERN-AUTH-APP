@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import '../CSS/style.css';
 import { loginUser } from '../api/api.jsx';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,6 +20,8 @@ const Login = () => {
       setSuccess('Login successful!');
       console.log('User logged in:', data);
       // Handle success, like redirecting or storing token
+       // Redirect to user blogs page after successful login
+       navigate('/userblogs'); // Redirects to the /userblogs route
     } catch (err) {
       setError(err.message || 'Login failed');
     }
